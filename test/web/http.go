@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/tebeka/selenium"
+	"github.com/sclevine/agouti"
 )
 
 func crawl(url string) {
@@ -18,18 +20,66 @@ func crawl(url string) {
 	//body, err := ioutil.ReadAll(resp.Body)
 	//fmt.Printf("body=%s\n", body)
 
-	doc, err := goquery.NewDocument("http://sports.sina.com.cn")
+	doc, _ := goquery.NewDocument(url)
 
-	fmt.Println(doc)
-	dhead := doc.Find("head")
-	dcharset := dhead.Find("meta[http-equiv]")
-	charset, _ := dcharset.Attr("content")
+	//fmt.Println(doc)
+	dbody := doc.Find("body")
+	//dcharset := dhead.Find("meta[http-equiv]")
+	//charset, _ := dcharset.Attr("content")
 
-	fmt.Println(dhead.Html())
-	fmt.Println(charset)
-	fmt.Println(err)
+	//fmt.Println(dbody.Html())
+	//fmt.Println(charset)
+	//fmt.Println(err)
+
+	dbody.Find("div.c-container").Each(func(i int, selection *goquery.Selection) {
+		title, _ := selection.Html()
+		fmt.Println(title)
+	})
+}
+
+func selen() {
+	var code = `
+package main
+import "fmt"
+
+func main() {
+	fmt.Println("Hello WebDriver!\n")
+}
+`
+
+	caps := selenium.Capabilities{"browserName": "firefox"}
+	wd, _ := selenium.NewRemote(caps, "")
+	defer wd.Quit()
+
+	// Get simple playground interface
+	wd.Get("http://play.golang.org/?simple=1")
+
+	// Enter code in textarea
+	elem, _ := wd.FindElement(selenium.ByCSSSelector, "#code")
+	elem.Clear()
+	elem.SendKeys(code)
+}
+
+
+func ago() {
+	driver := agouti.Selenium() // 设置 driver
+	driver.Start()
+	page,_ := driver.NewPage(agouti.Browser("chrome"))
+
+	page.Navigate("http://man.pay.test.dmall.com:8080/bestcard/list")
+
+	fmt.Println(page.Find("header").Text())
+	page.Find("#su").Click()
+	////page.Click(SingleClick,LeftButton)
+	fmt.Println(page.URL())
+	//
+	driver.Stop() // 关闭 driver
 }
 
 func main() {
-	crawl("http://www.baidu.com")
+	//crawl("http://www.baidu.com/s?wd=%E6%B5%8B%E8%AF%95&rsv_spt=1&rsv_iqid=0xefe8b41d00090434&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=8&rsv_sug1=10&rsv_sug7=100&prefixsug=%E6%B5%8B%E8%AF%95&rsp=9&inputT=35532&rsv_sug4=35534")
+	ago()
+
+
+
 }
