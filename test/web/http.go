@@ -5,6 +5,9 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/tebeka/selenium"
 	"github.com/sclevine/agouti"
+	"log"
+	"github.com/fedesog/webdriver"
+	"time"
 )
 
 func crawl(url string) {
@@ -76,9 +79,49 @@ func ago() {
 	driver.Stop() // 关闭 driver
 }
 
+func fed(){
+	chromeDriver := webdriver.NewChromeDriver("/usr/local/Cellar/chromedriver/2.22/bin/chromedriver")
+	err := chromeDriver.Start()
+	if err != nil {
+		log.Println(err)
+	}
+	desired := webdriver.Capabilities{"Platform": "Mac"}
+	required := webdriver.Capabilities{}
+	session, err := chromeDriver.NewSession(desired, required)
+	if err != nil {
+		log.Println(err)
+	}
+
+	session.Url("https://www.baidu.com/")
+	el, err := session.FindElement("id", "kw")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(el.Text())
+
+	el.SendKeys("aaa")
+
+	el2, err := session.FindElement("id", "su")
+	if err != nil {
+		panic(err)
+	}
+	el2.Click()
+
+
+	time.Sleep(10 * time.Second)
+	session.Delete()
+	chromeDriver.Stop()
+}
+
 func main() {
-	//crawl("http://www.baidu.com/s?wd=%E6%B5%8B%E8%AF%95&rsv_spt=1&rsv_iqid=0xefe8b41d00090434&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=8&rsv_sug1=10&rsv_sug7=100&prefixsug=%E6%B5%8B%E8%AF%95&rsp=9&inputT=35532&rsv_sug4=35534")
-	ago()
+	//crawl("http://www.baidu.com/s?wd=%E6%B5%8B%E8%AF%95&rsv_spt=1&
+	// rsv_iqid=0xefe8b41d00090434&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=u
+	// tf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=8&rsv_sug1=10&rsv_sug7=100&prefixsug=
+	// %E6%B5%8B%E8%AF%95&rsp=9&inputT=35532&rsv_sug4=35534")
+	//ago()
+	//selen()
+
+	fed()
 
 
 
