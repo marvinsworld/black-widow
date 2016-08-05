@@ -45,11 +45,11 @@ func main() {
 
 
 
-	el2, err := session.FindElement("class name", "vm")
+	el2, err := session.FindElement("class name", "pn")
 	if err != nil {
 		panic(err)
 	}
-	el2.Submit()
+	el2.Click()
 
 	//http://www.baiduyun.me/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1
 
@@ -57,5 +57,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	el3.Submit()
+	el3.Click()
 }
