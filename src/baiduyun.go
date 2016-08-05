@@ -5,6 +5,7 @@ import (
 	"log"
 	"fmt"
 	"black-widow/src/aaa"
+	"time"
 )
 
 func Open_url(url string) (*webdriver.Session, error) {
@@ -41,21 +42,27 @@ func main() {
 	browser_sesion := browser.BrowserSession{session}
 
 	browser_sesion.Fill_by_id("ls_username", "hehe198505")
-	browser_sesion.Fill_by_id("ls_password","hehe1234567")
-
-
+	browser_sesion.Fill_by_id("ls_password", "hehe1234567")
 
 	el2, err := session.FindElement("class name", "pn")
 	if err != nil {
 		panic(err)
 	}
 	el2.Click()
-
+	time.Sleep(2 * time.Second)
 	//http://www.baiduyun.me/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1
 
 	el3, err := session.FindElement("id", "header-loggin-btn")
 	if err != nil {
 		panic(err)
 	}
-	el3.Click()
+	el3.Submit()
+
+	//el4, err := session.FindElement("class name", "gt_slider_knob")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//el4.Submit()
+
+
 }
