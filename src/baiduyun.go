@@ -40,5 +40,22 @@ func main() {
 
 	browser_sesion := browser.BrowserSession{session}
 
-	browser_sesion.Fill_by_id("ls_username", "hehe198504")
+	browser_sesion.Fill_by_id("ls_username", "hehe198505")
+	browser_sesion.Fill_by_id("ls_password","hehe1234567")
+
+
+
+	el2, err := session.FindElement("class name", "vm")
+	if err != nil {
+		panic(err)
+	}
+	el2.Submit()
+
+	//http://www.baiduyun.me/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1
+
+	el3, err := session.FindElement("id", "header-loggin-btn")
+	if err != nil {
+		panic(err)
+	}
+	el3.Submit()
 }
