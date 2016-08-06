@@ -32,7 +32,7 @@ var _ = Describe("UserLogin", func() {
 		By("allowing the user to fill out the login form and submit it", func() {
 			loginPrompt, _ := page.FindByID("u1").Text()
 
-			fmt.Println("aaa"+loginPrompt)
+			fmt.Println("browser"+loginPrompt)
 
 			//Eventually(page.FindByLabel("E-mail")).Should(BeFound())
 			//Expect(page.Find("#account").Fill("payadmin")).To(Succeed())

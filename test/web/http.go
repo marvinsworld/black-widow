@@ -98,7 +98,7 @@ func fed() {
 	}
 	fmt.Println(el.Text())
 
-	el.SendKeys("aaa")
+	el.SendKeys("browser")
 
 	el2, err := session.FindElement("id", "su")
 	if err != nil {

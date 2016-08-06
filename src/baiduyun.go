@@ -4,7 +4,7 @@ import (
 	"github.com/fedesog/webdriver"
 	"log"
 	"fmt"
-	"black-widow/src/aaa"
+	"black-widow/src/browser"
 	"time"
 )
 
@@ -34,6 +34,10 @@ func Fill_by_id(session *webdriver.Session, id string, value string) {
 	el.SendKeys(value)
 }
 
+func Open_newTab(url string) {
+
+}
+
 func main() {
 	session, err := Open_url("http://www.baiduyun.me/forum.php");
 	fmt.Println(err)
@@ -52,11 +56,11 @@ func main() {
 	time.Sleep(2 * time.Second)
 	//http://www.baiduyun.me/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1
 
-	el3, err := session.FindElement("id", "header-loggin-btn")
-	if err != nil {
-		panic(err)
-	}
-	el3.Submit()
+	//el3, err := session.FindElement("id", "header-loggin-btn")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//el3.Submit()
 
 	//el4, err := session.FindElement("class name", "gt_slider_knob")
 	//if err != nil {
@@ -64,5 +68,23 @@ func main() {
 	//}
 	//el4.Submit()
 
+
+	//fmt.Println("开始打卡")
+	//time.Sleep(6 * time.Second)
+	//fmt.Println("开始")
+	//daka, err := session.FindElement("id", "pper_a")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//daka.Click()
+
+
+	el, err := session.FindElement("tag name", "body")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(el.Text())
+
+	err = el.SendKeys("ctrl t")
 
 }
