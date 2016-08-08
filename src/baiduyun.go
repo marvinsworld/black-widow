@@ -45,7 +45,7 @@ func main() {
 
 	browser_sesion := browser.BrowserSession{session}
 
-	browser_sesion.Fill_by_id("ls_username", "hehe198505")
+	browser_sesion.Fill_by_id("ls_username", "hehe198504")
 	browser_sesion.Fill_by_id("ls_password", "hehe1234567")
 
 	el2, err := session.FindElement("class name", "pn")
