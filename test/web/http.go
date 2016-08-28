@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"fmt"
@@ -111,7 +111,7 @@ func fed() {
 	chromeDriver.Stop()
 }
 
-func main() {
+//func main() {
 	//crawl("http://www.baidu.com/s?wd=%E6%B5%8B%E8%AF%95&rsv_spt=1&
 	// rsv_iqid=0xefe8b41d00090434&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=u
 	// tf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=8&rsv_sug1=10&rsv_sug7=100&prefixsug=
@@ -119,6 +119,6 @@ func main() {
 	//ago()
 	//selen()
 
-	fed()
+	//fed()
 
-}
+//}
